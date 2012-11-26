@@ -6,8 +6,8 @@ require_relative "computers.rb"
 $people = {
 	"Peter Craven" => Person.new(
 		name="Peter Craven",
-		email=EmailAcct.new("pcraven@schnarg.com"),
-		computers=$computers[:pcraven_comp],
+		emailaccts=[EmailAcct.new("pcraven@schnarg.com")],
+		computers=[$computers[:pcraven_comp]],
 		timeline=$timelines[:pcraven_tl]
 	),
 

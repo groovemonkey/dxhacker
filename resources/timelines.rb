@@ -1,7 +1,7 @@
 
 
 $timelines = {
-	:pcraven_tl => {0 => Proc.new {self.send_email(:pcraven, self.computers[0], "Peter Craven", "message")}},
+	:pcraven_tl => {3 => Proc.new {|p| p.send_email("pcraven@schnarg.com", 0, "Peter Craven", "message")}},
 
 
 }
