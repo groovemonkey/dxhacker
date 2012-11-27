@@ -1,4 +1,5 @@
 class Network
+	attr_reader :arp_table
 
 	def initialize()
 		@nodes = {}

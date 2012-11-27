@@ -2,7 +2,7 @@ require_relative "ConnectionLog.rb"
 require_relative "Network.rb"
 
 class Computer
-	attr_reader :ip, :hostname, :type
+	attr_reader :ip, :hostname, :type, :log
 
 def initialize(type, hostname, documents, files)
 	@type = type
@@ -17,7 +17,7 @@ end
 
 def connect_to(ip)
 	@log.record(:out, ip)
-	@Internet.getNode[ip].receive_connection(self.ip)
+	$Internet.getNode(ip).receive_connection(self.ip)
 end
 
 

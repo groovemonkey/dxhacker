@@ -38,8 +38,21 @@ while running
 		$people.each do |name, p|
 			print "\n\n#{name}'s e-mail:\n #{p.emailaccts.each {|a| print a.messages }}\n\n"
 		end
+	elsif choice == "logdump"
+		print "\nDEBUG: Dumping all Mail!\n"
+		$computers.each do |name, c|
+			print "\n\n#{name}'s logs:\n #{c.log.view_log()}"
+		end
+	elsif choice == "gametime"
+		puts "Gametime is #{$gt.getTime}"
+	elsif choice == "search"
+		print("\n\nPlease enter your search query: ")
+		query = gets().downcase.chomp!
+		# the entered string could be:
+		# hostname, IP address, first name, last name, full name, phone number
+		# check all cases against the string. If nothing is found, return "not found."
 	end
 
-	puts "DEBUG! Gametime is #{$gt.getTime}"
+	
 	$gt.tick
 end

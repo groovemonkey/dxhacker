@@ -14,5 +14,10 @@ class Person
 		puts "#{@name} just sent an e-mail to #{toaccount}!\n" if $debug
 	end
 
+	def access(hostname, fromcomputer)
+		ip = $Internet.arp_table[hostname]
+		@computers[fromcomputer].connect_to(ip)
+	end
+
 
 end
