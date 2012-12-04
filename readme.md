@@ -1,5 +1,6 @@
 # TODO:
 
+
 websites: NPCs just request connections? Or do they actually use the http_request method? How to display the returned web page string?
 
 Create a file for every user called "web history" that records a list of all pages visited?
@@ -7,13 +8,13 @@ Create a file for every user called "web history" that records a list of all pag
 
 
 -phones:
-1. have IP addresses, so take "generate_ip()" out of Computers, and have both Computers and Phones inherit from an "IP Device" class.
-2. are connected to the internet
-3. have address books.
-4. have call_logs
-5. People have phones.
+-- People have phones
+-- global phone list and phone/internet registration
+-- merge computer list and phone list into one global DEVICE LIST?
+-- script calls between people
+-- NPCs have address books that are passed to phones when they're created? Maybe a "know each other" list? Ugh...implement later...
 
-Person.address_book = {"ip" => "name"}
+
 Person.make_call(<to>, self.phone.ip)
 
 def Person.receive_call(ip)
