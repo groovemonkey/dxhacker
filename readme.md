@@ -1,5 +1,8 @@
 # TODO:
 
+websites: NPCs just request connections? Or do they actually use the http_request method? How to display the returned web page string?
+
+Create a file for every user called "web history" that records a list of all pages visited?
 
 
 

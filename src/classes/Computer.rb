@@ -4,12 +4,11 @@ require_relative "Network.rb"
 class Computer
 	attr_reader :ip, :hostname, :type, :log
 
-def initialize(type, hostname, documents, files, website)
+def initialize(type, hostname, files, website)
 	@type = type
 	@hostname = hostname
 	@ip = generate_ip()
 	@log = ConnectionLog.new()
-	@documents = documents
 	@files = files
 	@website = website
 end
