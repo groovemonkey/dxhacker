@@ -4,14 +4,14 @@ require_relative "Network.rb"
 class Computer
 	attr_reader :ip, :hostname, :type, :log
 
-def initialize(type, hostname, documents, files)
+def initialize(type, hostname, documents, files, website)
 	@type = type
 	@hostname = hostname
 	@ip = generate_ip()
 	@log = ConnectionLog.new()
 	@documents = documents
 	@files = files
-
+	@website = website
 end
 
 
@@ -38,6 +38,32 @@ def generate_ip()
 	return address[0..-2].to_sym
 end
 
+def http_request(hostAndPage)
+			# separates the HOSTNAME from the PAGE
+			split = hostAndPage.split("/")
+			host = split[0] # everything before the first slash
+			page =  "/" + split[1..-1].join() # "/page/path"
 
+			puts "host is #{host} and page is #{page}" if $debug
+
+			# IP address -- needs to work if player enters ip OR hostname
+			if host.include?(":")
+				ip = host
+			else
+				ip = $Internet.arp(host)
+			end
+
+			self.connect_to(ip) # Logging
+			# return the requested page
+			return $Internet.getNode(ip).http_serve(page)
 
 end
+
+
+def http_serve(page)
+	# returns the requested page in the form of a string.
+	return @website[page]
+end
+
+
+end # end class

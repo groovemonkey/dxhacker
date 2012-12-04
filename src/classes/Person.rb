@@ -1,6 +1,6 @@
 
 class Person
-	attr_accessor :emailaccts, :timeline
+	attr_accessor :emailaccts, :timeline, :computers
 
 	def initialize(name, emailaccts, computers, timeline)
 		@name = name

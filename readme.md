@@ -1,11 +1,39 @@
 # TODO:
 
+
+
+
+-phones:
+1. have IP addresses, so take "generate_ip()" out of Computers, and have both Computers and Phones inherit from an "IP Device" class.
+2. are connected to the internet
+3. have address books.
+4. have call_logs
+5. People have phones.
+
+Person.address_book = {"ip" => "name"}
+Person.make_call(<to>, self.phone.ip)
+
+def Person.receive_call(ip)
+	if self.phone.address_book[ip]
+		self.phone.log_call(ip, self.phone.address_book[ip]) #<-- pass IP addr and caller name
+		# make Phone.log_call take ONE or TWO arguments (either just an IP, or an IP and a name).
+		# write to the call log accordingly.
+end
+
+
+
+
+
+
+
+
+
 - search -- put in domains, ip addresses, etc. Get back public info about them.
 - Logins/passwords for all computers
 
 - Servers have public websites (documents?). Maybe a "port80" attribute that stores text?
 - "browser" or URL bar that allows you to access public sites. (if hostname.port80 puts hostname.port80[$gt.getTime()])...or something like that.
-- how to websites change over time? (news sites, etc.). Like above?
+- how do websites change over time? (news sites, etc.). Like above?
 
 -emails should be arrays of "subject", "message", etc.
 -maildump/netdump/logdump -- print statements execute in a weird order.
