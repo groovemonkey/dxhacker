@@ -25,5 +25,10 @@ class Person
 		$devices[device].get_Hacked()
 	end
 
+	def write(content, compnumber=0)
+		@computers[compnumber].createDocument(content)
+		puts "DEBUG: #{@name} just created a file" if $debug
+	end
+
 
 end

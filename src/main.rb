@@ -64,6 +64,12 @@ while running
 			end
 		end
 
+	elsif choice == "filedump"
+		$devices.each do |name, d|
+			d.view_files() if d.class == Computer
+		end
+
+
 	elsif choice == "hack"
 		print "Enter the IP or Hostname of the target: "
 		targetname = gets().chomp

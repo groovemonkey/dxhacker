@@ -13,9 +13,6 @@ FEATURES:
 	-installing or using software (rootkit, log_wiper)
 	-if rootkit is installed, computer is added to your Person's "hacked" list and you can re-access anytime
 
-for story scripting: add document creation commands on Computer (for journals, hints, etc.)
-
-decide how "NSC" (non-story characters) will be modeled: documents and browsing history? Anything else?
 
 add PROGRAMS like log_wiper, keylogger (notifies you of events on that machine), etc.
 
@@ -104,6 +101,7 @@ FINISHED FEATURES:
 -netdump -- see all internet nodes, ARP and RARP tables
 -logdump -- see all logs
 -hack -- lets you hack into computers
+-filedump -- see all files on all Computers
 
 computers can connect to each other
 people can send email to each other
@@ -111,4 +109,5 @@ IPDevices automatically join the Internet when they are created.
 people can call each other
 scripting API is better now (timelines.rb) -- web browsing/history, phone calls, etc.
 implement getIP() and getHostname() in Network.rb, which take any device identifier and spit out the appropriate form (decoupling!)
-
+decide how "NSC" (non-story characters) will be modeled: documents and browsing history? Anything else?
+for story scripting: add document creation commands on Computer (for journals, hints, etc.)
