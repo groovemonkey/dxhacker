@@ -31,8 +31,6 @@ for Phone.call and Computer.connect -- make those methods take ANY arg (device s
 
 improve getHostname() and getIP() to be able to take $device SYMBOLS as well (more error-proof)
 
-Create a file for every user called "web history" that records a list of all pages visited?
-
 rootkits might be discovered? Roll on every turn?
 
 abstract servers out as a separate class
@@ -102,6 +100,7 @@ FINISHED FEATURES:
 -logdump -- see all logs
 -hack -- lets you hack into computers
 -filedump -- see all files on all Computers
+-dumphistory -- see all webhistories
 
 computers can connect to each other
 people can send email to each other
@@ -112,3 +111,4 @@ implement getIP() and getHostname() in Network.rb, which take any device identif
 decide how "NSC" (non-story characters) will be modeled: documents and browsing history? Anything else?
 for story scripting: add document creation commands on Computer (for journals, hints, etc.)
 remove Network#arp and Network#rarp functions -- switch everything to using getHostname() and getIP().
+Create a file for every user called "web history" that records a list of all pages visited?

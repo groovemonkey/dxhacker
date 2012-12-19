@@ -13,8 +13,7 @@ class Computer < IPDevice
 
 
 	def http_request(url)
-		# www.host.com/page/or/multiple/pages
-		# separates the HOSTNAME from the PAGE
+		# www.host.com/page/or/multiple/pages --> separates the HOSTNAME from the PAGE
 		split = url.split("/")
 		host = split[0] # everything before the first slash
 		page =  "/" + split[1..-1].join() # "/page/path"
@@ -22,11 +21,12 @@ class Computer < IPDevice
 		puts "New network connection:\nHost #{self.hostname} (#{self.ip}) connected to host is #{host}, requesting #{page}" if $debug
 
 		dest_ip = $Internet.getIP(host)
-		#host.include?(":") ? ip = host : ip = $Internet.arp(host)
-
-		self.connect_to(dest_ip) # Logging
+		
+		# Logging
+		self.connect_to(dest_ip)
 		@web_history << "#{url}\n"
-		return $Internet.getNode(dest_ip).http_serve(page, self.ip) 	# return the requested page
+
+		return $Internet.getNode(dest_ip).http_serve(page, self.ip)
 	end
 
 
