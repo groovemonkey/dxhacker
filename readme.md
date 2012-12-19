@@ -23,9 +23,9 @@ AI that "tracks" you down if you've hacked important computers?
 
 
 
-
-
+####################
 FIXES/IMPROVEMENTS:
+####################
 
 for Phone.call and Computer.connect -- make those methods take ANY arg (device sym, IP, or hostname?) -- using getHostname and getIP?
 
@@ -35,14 +35,11 @@ rootkits might be discovered? Roll on every turn?
 
 abstract servers out as a separate class
 
-
 -phones:
 phone address book is not being used (view_log does a hostname (phone ->'name') lookup)
-
 -- NPCs have (optional?) address books that are passed to phones when they're created? 
 
 Maybe a "know each other" list? -- each person has the other's name/number stored in their phone's address book, and each other's name/e-mail address stored in the e-mail address book.
-
 
 - search -- put in domains, ip addresses, etc. Get back public info about them.
 - Logins/passwords for all computers
@@ -64,12 +61,9 @@ How to make a new character:
 2. create device objects for that person in "~/resources/computers.rb"
 3. Write the "story" for that person -- their timeline! ("~/resources/timelines.rb")
 
-
-
 ######################################
 
 Sample Gameplay:
-
 
 -player checks a news website (liberal, conservative, and underground)
 -player sees a news story about a government contract awarded to a contractor for something cool-sounding, but potentially scary.
@@ -81,15 +75,12 @@ OR
 
 Either way, player finds suspicious information. And the story has begun...
 
-
-
 ######################################
 
 The game is called Timeline. It's a snapshot of a futuristic world, with multiple stories happening independently of your watching. Wherever you start to unravel the thread, you'll be able to follow clues into the narrative you've discovered. The only catch: which narrative will you follow? What will you do? What effects will your actions have?
 
 v1: timelines and a basic "story" that you can follow through hacking.
 v2: your actions can affect timelines.
-
 
 ######################################
 
