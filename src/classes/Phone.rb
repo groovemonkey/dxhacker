@@ -24,5 +24,9 @@ class Phone < IPDevice
 		@address_book[ip] = name
 	end
 
+	def getHacked
+		puts "#{hostname} was compromised...but it's a phone, so you don't get anything yet."
+	end
+
 end
 

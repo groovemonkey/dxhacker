@@ -29,6 +29,14 @@ class Network
 		return @nodes[ip]
 	end
 
+	def getHostname(host)
+		!host.include?(":") ? host : @rarp_table[host]
+	end
+
+	def getIP(host)
+		host.include?(":") ? host : @arp_table[host]
+	end
+
 	def viewAllNodes()
 		nodelist = ""
 		@nodes.each do |k, v|

@@ -22,6 +22,7 @@ class IPDevice
 	end
 
 
+
 private
 	def generate_ip()
 		# thanks to Lars Haugseth -- http://stackoverflow.com/questions/13913600/how-to-use-java-arrays-translating-from-ruby-to-java

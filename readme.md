@@ -3,31 +3,50 @@
 
 
 # TODO:
- {|p| p.computers[0].http_request("www.eaglenews.com/secret")}, <---- simplify with a wrapper method?
- Person.browse(url) ?
 
-remove Person.access (duplicate of Computer.connect)
+##########
+FEATURES:
+##########
+
+-- menu for doing stuff with hacked computers:
+	-bouncing connections through them (proxies)
+	-installing or using software (rootkit, log_wiper)
+	-if rootkit is installed, computer is added to your Person's "hacked" list and you can re-access anytime
+
+for story scripting: add document creation commands on Computer (for journals, hints, etc.)
+
+decide how "NSC" (non-story characters) will be modeled: documents and browsing history? Anything else?
+
+add PROGRAMS like log_wiper, keylogger (notifies you of events on that machine), etc.
+
+AI that "tracks" you down if you've hacked important computers?
+	-are you noticed at all? Use the computer's security level to decide
+	-during tracking -- log wiper ruins the trail
+					 -- at each tracking step, roll to see if trail is lost
 
 
-in Networks.rb, make arp and rarp internal -- just have a DNS method or something, which takes EITHER ipaddr or hostname, and returns the corresponding one. This logic already exists in...Computer#http_request()
-----OR... have a "get_hostname" and "get_ip" method? (which returns what you put in, if it's already the right thing, else resolves it).
 
-phone address book is not being used (view_log does a hostname (phone ->'name') lookup)
 
-websites: NPCs just request connections? Or do they actually use the http_request method? How to display the returned web page string?
+
+FIXES/IMPROVEMENTS:
+
+improve getHostname() and getIP() to be able to take $device SYMBOLS as well (more error-proof)
+
+remove Network#arp and Network#rarp functions -- switch everything to using getHostname() and getIP().
 
 Create a file for every user called "web history" that records a list of all pages visited?
 
+rootkits might be discovered? Roll on every turn?
+
+abstract servers out as a separate class
 
 
 -phones:
--- merge computer list and phone list into one global DEVICE LIST?
+phone address book is not being used (view_log does a hostname (phone ->'name') lookup)
 
--- script calls between people
 -- NPCs have (optional?) address books that are passed to phones when they're created? 
 
 Maybe a "know each other" list? -- each person has the other's name/number stored in their phone's address book, and each other's name/e-mail address stored in the e-mail address book.
-
 
 
 - search -- put in domains, ip addresses, etc. Get back public info about them.
@@ -47,14 +66,8 @@ Maybe a "know each other" list? -- each person has the other's name/number store
 How to make a new character:
 
 1. create a new Person object in "~/resources/people.rb"
-2. create a new Computer object for that person in "~/resources/computers.rb"
+2. create device objects for that person in "~/resources/computers.rb"
 3. Write the "story" for that person -- their timeline! ("~/resources/timelines.rb")
-
-
-
-
-
-
 
 
 
@@ -83,16 +96,19 @@ v1: timelines and a basic "story" that you can follow through hacking.
 v2: your actions can affect timelines.
 
 
-
 ######################################
 
 FINISHED FEATURES:
 
 -maildump -- see all email
--netdump -- see all internet nodes
+-netdump -- see all internet nodes, ARP and RARP tables
 -logdump -- see all logs
+-hack -- lets you hack into computers
 
 computers can connect to each other
 people can send email to each other
 IPDevices automatically join the Internet when they are created.
+people can call each other
+scripting API is better now (timelines.rb) -- web browsing/history, phone calls, etc.
+implement getIP() and getHostname() in Network.rb, which take any device identifier and spit out the appropriate form (decoupling!)
 
