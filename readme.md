@@ -1,5 +1,18 @@
-# TODO:
+# WHAT I WAS JUST WORKING ON:
 
+
+
+# TODO:
+ {|p| p.computers[0].http_request("www.eaglenews.com/secret")}, <---- simplify with a wrapper method?
+ Person.browse(url) ?
+
+remove Person.access (duplicate of Computer.connect)
+
+
+in Networks.rb, make arp and rarp internal -- just have a DNS method or something, which takes EITHER ipaddr or hostname, and returns the corresponding one. This logic already exists in...Computer#http_request()
+----OR... have a "get_hostname" and "get_ip" method? (which returns what you put in, if it's already the right thing, else resolves it).
+
+phone address book is not being used (view_log does a hostname (phone ->'name') lookup)
 
 websites: NPCs just request connections? Or do they actually use the http_request method? How to display the returned web page string?
 
@@ -8,27 +21,12 @@ Create a file for every user called "web history" that records a list of all pag
 
 
 -phones:
--- People have phones
--- global phone list and phone/internet registration
 -- merge computer list and phone list into one global DEVICE LIST?
+
 -- script calls between people
--- NPCs have address books that are passed to phones when they're created? Maybe a "know each other" list? Ugh...implement later...
+-- NPCs have (optional?) address books that are passed to phones when they're created? 
 
-
-Person.make_call(<to>, self.phone.ip)
-
-def Person.receive_call(ip)
-	if self.phone.address_book[ip]
-		self.phone.log_call(ip, self.phone.address_book[ip]) #<-- pass IP addr and caller name
-		# make Phone.log_call take ONE or TWO arguments (either just an IP, or an IP and a name).
-		# write to the call log accordingly.
-end
-
-
-
-
-
-
+Maybe a "know each other" list? -- each person has the other's name/number stored in their phone's address book, and each other's name/e-mail address stored in the e-mail address book.
 
 
 
@@ -41,6 +39,22 @@ end
 
 -emails should be arrays of "subject", "message", etc.
 -maildump/netdump/logdump -- print statements execute in a weird order.
+
+
+
+######################################
+
+How to make a new character:
+
+1. create a new Person object in "~/resources/people.rb"
+2. create a new Computer object for that person in "~/resources/computers.rb"
+3. Write the "story" for that person -- their timeline! ("~/resources/timelines.rb")
+
+
+
+
+
+
 
 
 
@@ -79,4 +93,6 @@ FINISHED FEATURES:
 -logdump -- see all logs
 
 computers can connect to each other
-people can send email to each other.
+people can send email to each other
+IPDevices automatically join the Internet when they are created.
+

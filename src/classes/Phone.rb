@@ -1,40 +1,28 @@
 require_relative "IPDevice.rb"
 require_relative "GameTime.rb"
+require_relative "Network.rb"
 
-class Phone < IPDevice.rb
+class Phone < IPDevice
+	attr_reader :address_book
 
-	def initialize()
-		@ip = generate_ip()
-		@address_book = {}
-		@call_log {}
+	def initialize(hostname, address_book={})
+		super(hostname)
+		@address_book = address_book
 	end
 
+	def call(phone_ID)
+		# takes the phone's ID (the symbol it's stored under in $devices)
+		phone = $devices[phone_ID]
+
+		destination_ip = $Internet.arp(phone.hostname)
+		self.connect_to(destination_ip)
+
+		puts "\nDEBUG: a call was just made to #{phone.hostname}, at IP #{destination_ip}" if $debug
+	end
 
 	def add_to_address_book(ip, name)
-		# ips should be strings, not ints
 		@address_book[ip] = name
 	end
-
-	def log_call(ip)
-		time = $gt.getTime()
-		# allow for logging several calls during the same time slot
-		if @call_log[time]
-			@call_log[time] << ip
-		else
-			@call_log[time] = [ip]
-		end
-	end
-
-	def view_log()
-		coll = ""
-		@call_log.each do |time, ip|
-			coll << "\nTime: #{time} -- Call Received from #{ip}"
-			coll << " (#{@address_book[ip]})" if @address_book.include?(ip) # (Steve Applebaum)
-		end
-
-		puts coll
-	end
-
 
 end
 

@@ -7,12 +7,6 @@ $gt = GameTime.new()
 
 require_relative "../resources/people.rb"
 
-# populate the Internet
-$computers.each do |name, computer|
-	$Internet.join(computer)
-end
-
-
 
 # MAIN LOOP
 running = true
@@ -32,15 +26,25 @@ while running
 		break
 	elsif choice == "netdump"
 		puts "\nDEBUG: Dumping all Registered Internet Nodes!\n"
-		puts "\n" + $Internet.viewAllNodes() + "\n\n\n"
+		puts "\n" + $Internet.viewAllNodes() + "\n\n"
+		puts "\nARP table:\n"
+		$Internet.arp_table.each do |kv|
+			puts "#{kv}"
+		end
+
+		puts "\n RARP Table\n"
+		$Internet.arp_table.each do |kv|
+			puts "#{kv}"
+		end
+
 	elsif choice == "maildump"
 		print "\nDEBUG: Dumping all Mail!\n"
 		$people.each do |name, p|
 			print "\n\n#{name}'s e-mail:\n #{p.emailaccts.each {|a| print a.messages }}\n\n"
 		end
 	elsif choice == "logdump"
-		print "\nDEBUG: Dumping all Mail!\n"
-		$computers.each do |name, c|
+		print "\nDEBUG: Dumping all logs!\n"
+		$devices.each do |name, c|
 			print "\n\n#{name}'s logs:\n #{c.log.view_log()}"
 		end
 	elsif choice == "gametime"

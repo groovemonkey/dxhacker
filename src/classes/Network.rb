@@ -1,5 +1,5 @@
 class Network
-	attr_reader :arp_table
+	attr_reader :arp_table, :rarp_table
 
 	def initialize()
 		@nodes = {}
@@ -7,14 +7,15 @@ class Network
 		@rarp_table = {}
 	end
 
-	def join(computer)
-		hostname = computer.hostname
-		ip = computer.ip
-
-		@nodes[ip] = computer
+	def join(device)
+		ip = device.ip
+		hostname = device.hostname
 		@arp_table[hostname] = ip
 		@rarp_table[ip] = hostname
+
+		@nodes[ip] = device
 	end
+
 
 	def arp(hostname)
 		@arp_table[hostname]
@@ -31,7 +32,7 @@ class Network
 	def viewAllNodes()
 		nodelist = ""
 		@nodes.each do |k, v|
-			nodelist << "#{k} -- #{v.hostname}"
+			nodelist << "#{v.hostname} -- #{k}\n"
 		end
 
 		return nodelist

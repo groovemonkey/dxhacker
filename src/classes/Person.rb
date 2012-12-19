@@ -1,11 +1,12 @@
 
 class Person
-	attr_accessor :emailaccts, :timeline, :computers
+	attr_accessor :emailaccts, :timeline, :computers, :phone
 
-	def initialize(name, emailaccts, computers, timeline)
+	def initialize(name, emailaccts, computers, phone, timeline)
 		@name = name
 		@emailaccts = emailaccts
 		@computers = computers
+		@phone = phone
 		@timeline = timeline
 	end
 
@@ -14,9 +15,8 @@ class Person
 		puts "#{@name} just sent an e-mail to #{toaccount}!\n" if $debug
 	end
 
-	def access(hostname, fromcomputer)
-		ip = $Internet.arp_table[hostname]
-		@computers[fromcomputer].connect_to(ip)
+	def browse(url)
+		@computers[0].http_request(url)
 	end
 
 
