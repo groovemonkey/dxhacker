@@ -25,7 +25,7 @@ class ConnectionLog
 			else
 				t = entry[0]
 				ip = entry[2]
-				hostname = $Internet.rarp(ip)
+				hostname = $Internet.getHostname(ip)
 
 				if entry[1] == :out
 					desc = "connected to "

@@ -27,9 +27,9 @@ AI that "tracks" you down if you've hacked important computers?
 
 FIXES/IMPROVEMENTS:
 
-improve getHostname() and getIP() to be able to take $device SYMBOLS as well (more error-proof)
+for Phone.call and Computer.connect -- make those methods take ANY arg (device sym, IP, or hostname?) -- using getHostname and getIP?
 
-remove Network#arp and Network#rarp functions -- switch everything to using getHostname() and getIP().
+improve getHostname() and getIP() to be able to take $device SYMBOLS as well (more error-proof)
 
 Create a file for every user called "web history" that records a list of all pages visited?
 
@@ -111,3 +111,4 @@ scripting API is better now (timelines.rb) -- web browsing/history, phone calls,
 implement getIP() and getHostname() in Network.rb, which take any device identifier and spit out the appropriate form (decoupling!)
 decide how "NSC" (non-story characters) will be modeled: documents and browsing history? Anything else?
 for story scripting: add document creation commands on Computer (for journals, hints, etc.)
+remove Network#arp and Network#rarp functions -- switch everything to using getHostname() and getIP().

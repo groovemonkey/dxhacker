@@ -16,24 +16,17 @@ class Network
 		@nodes[ip] = device
 	end
 
-
-	def arp(hostname)
-		@arp_table[hostname]
-	end
-
-	def rarp(ip)
-		@rarp_table[ip]
-	end
-
 	def getNode(ip)
 		return @nodes[ip]
 	end
 
 	def getHostname(host)
+		host = host.to_s
 		!host.include?(":") ? host : @rarp_table[host]
 	end
 
 	def getIP(host)
+		host = host.to_s
 		host.include?(":") ? host : @arp_table[host]
 	end
 

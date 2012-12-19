@@ -14,7 +14,7 @@ class Phone < IPDevice
 		# takes the phone's ID (the symbol it's stored under in $devices)
 		phone = $devices[phone_ID]
 
-		destination_ip = $Internet.arp(phone.hostname)
+		destination_ip = $Internet.getIP(phone.hostname)
 		self.connect_to(destination_ip)
 
 		puts "\nDEBUG: a call was just made to #{phone.hostname}, at IP #{destination_ip}" if $debug
