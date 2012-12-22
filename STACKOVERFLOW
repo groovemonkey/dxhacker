@@ -1,0 +1,69 @@
+I'm using Sinatra to make one of my little Ruby adventure games work in the browser instead of in a terminal.
+
+The "main" function is now a "Game" object, so that each client can have their own gamestate. Now I need a way to pass around those Game objects across requests inside of a client's session.
+
+I realize that the underlying problem, of course, is that HTTP is a stateless protocol, but there's got to be some clever way of faking this...
+
+So, a two-part question:
+
+1. Is there a good way to persist a Ruby object (class instance) across HTTP requests in a user session?
+2. Is there a better solution to my problem that avoids this altogether?
+
+
+
+
+What I've Tried So Far:
+
+1. @instanceVariables -- my first instinct was to use an instance variable, thinking that Sinatra might keep those alive between requests. This is not the case.
+
+2. params -- I tried doing params[:game] = Game.new(), hoping there might be some automagical encoding of a Ruby object into a string that can be passed as a parameter. This didn't work, and resulted in a "no method .GameClassMethod() for NilClass" error. I take this to mean that my Ruby object (the instance of the Game class) is not surviving the trip into params[:game].
+
+3. session -- As above with params, I tried using session[:game] to store my Game object. No luck, same (no method x() for NilClass).
+
+3.5 session + JSON. This is really ugly, and I apologize to the programming gods, but I'm just trying to get something working to play with. I'm trying to store the player's modified Game object as JSON before making the next HTTP request, and then inflating it back into a Ruby object in the next method. This doesn't work, however, giving me the following error:
+
+###########
+JSON::GeneratorError at /play
+only generation of JSON objects or arrays allowed
+
+ app.rb in block in <main>
+    session[:game] = JSON.generate(Game.new()) # in the function for the /play route below
+###########
+
+
+
+The current state of affairs is below:
+
+# the ERB file ("console.erb") is just an HTML page with a little chunk of javascript that grabs the player's input and calls /play/command/:playercommand with it.
+
+###########
+require 'sinatra'
+require 'json'
+
+enable :sessions
+
+get '/play' do
+	if not session[:game]
+		session[:game] = JSON.generate(Game.new()) #Error. (see above)
+	end
+	erb :console
+end
+
+get '/play/' do
+	redirect "/play"
+end
+
+get '/play/command/:command' do |command|
+	game = JSON.parse(session[:game])
+	game.takeTurn(command)
+	session[:game] = JSON.generate(game)
+	redirect "/play"
+end
+
+get '/play/command/' do
+	game = JSON.parse(session[:game])
+	game.takeTurn()
+	session[:game] = JSON.generate(game)
+	redirect "/play"
+end
+###########

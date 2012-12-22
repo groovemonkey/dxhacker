@@ -1,0 +1,19 @@
+/*
+
+
+
+*/
+#console {
+	height: 430px;
+	width: 650px;
+	background-color: black;
+	color: white;
+}
+#commandfield {
+	width: 300px;
+	background-color: black;
+	color: green;
+}
+
+
+

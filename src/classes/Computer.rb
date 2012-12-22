@@ -4,11 +4,11 @@ require_relative "IPDevice.rb"
 class Computer < IPDevice
 	attr_reader :web_history
 
-	def initialize(hostname, files, website={})
+	def initialize(hostname, files, website={}, web_history="")
 		super(hostname)
 		@files = files
 		@website = website
-		@web_history = ""
+		@web_history = web_history
 	end
 
 
@@ -50,6 +50,25 @@ class Computer < IPDevice
 		@files.each {|content| output << "\n#{content}\n"}
 		puts output + "\n\n"
 	end
+
+
+
+	def to_json(*a)
+	    {
+	      'json_class'   => self.class.name,
+	      'data'         => [ "hostname" => @hostname,
+	      					"files" => @files,
+	      					"website" => @website,
+	      					"web_history" => @web_history ]
+	    }.to_json(*a)
+	end
+
+	def self.json_create(o)
+    	new(o['data'][0]['hostname'],
+    		o['data'][0]['files'],
+    		o['data'][0]['website'],
+    		o['data'][0]['web_history'] )
+  	end
 
 
 end # end class

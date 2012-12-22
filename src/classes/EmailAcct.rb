@@ -1,9 +1,9 @@
 class EmailAcct
 	attr_reader :address
 
-	def initialize(address)
+	def initialize(address, messages=[])
 		@address = address
-		@messages = []
+		@messages = messages
 	end
 
 	def send_message(toaccount, fromip, fromname, message)
@@ -32,5 +32,20 @@ class EmailAcct
 
 		return messagelist
 	end
+
+
+
+	def to_json(*a)
+	    {
+	      'json_class'   => self.class.name,
+	      'data'         => [ "address" => @address, "messages" => @messages ]
+	    }.to_json(*a)
+	end
+
+	def self.json_create(o)
+    	new(o['data'][0]['address'],
+    		o['data'][0]['messages'] )
+  	end
+
 
 end

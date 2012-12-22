@@ -31,4 +31,23 @@ class Person
 	end
 
 
+	def to_json(*a)
+	    {
+	      'json_class'   => self.class.name,
+	      'data'         => [ "name" => @name,
+	      					"emailaccts" => @emailaccts.to_json,
+	      					"computers" => @computers.to_json,
+	      					"phone" => @phone.to_json,
+	      					"timeline" => @timeline,  ]
+	    }.to_json(*a)
+	end
+
+	def self.json_create(o)
+    	new(o['data'][0]['name'],
+    		JSON.parse(o['data'][0]['emailaccts']),
+    		JSON.parse(o['data'][0]['computers']),
+    		JSON.parse(o['data'][0]['phone']),
+    		o['data'][0]['timeline'] )
+  	end
+
 end
