@@ -34,18 +34,4 @@ class EmailAcct
 	end
 
 
-
-	def to_json(*a)
-	    {
-	      'json_class'   => self.class.name,
-	      'data'         => [ "address" => @address, "messages" => @messages ]
-	    }.to_json(*a)
-	end
-
-	def self.json_create(o)
-    	new(o['data'][0]['address'],
-    		o['data'][0]['messages'] )
-  	end
-
-
 end

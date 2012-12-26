@@ -11,15 +11,4 @@ class GameTime
 		return @currenttime
 	end
 
-	def to_json(*a)
-	    {
-	      'json_class'   => self.class.name,
-	      'data'         => [ "currenttime" => @currenttime]
-	    }.to_json(*a)
-	end
-
-	def self.json_create(o)
-    	new(o['data'][0]['currenttime'])
-  	end
-
 end

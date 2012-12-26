@@ -28,18 +28,6 @@ class Phone < IPDevice
 		puts "#{hostname} was compromised...but it's a phone, so you don't get anything yet."
 	end
 
-	def to_json(*a)
-	    {
-	      'json_class'   => self.class.name,
-	      'data'         => [ "addr" => @address_book,
-	      					"hostname" => @hostname, ]
-	    }.to_json(*a)
-	end
-
-	def self.json_create(o)
-    	new(o['data'][0]['hostname'],
-    		o['data'][0]['addr'] )
-  	end
 
 end
 

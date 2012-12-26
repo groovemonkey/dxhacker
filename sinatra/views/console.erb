@@ -13,8 +13,12 @@
 	<h1>Your Console:</h1>
 
 	<div id="console">
-		<% game = JSON.parse(session[:game]) %>
-		<%= game.console %>
+		<% $gamestate.transaction(true) do
+			@game = $gamestate[:gameobj]
+		   end
+		%>
+
+		<%= @game.console %>
 	</div>
 
 	<div id="input">

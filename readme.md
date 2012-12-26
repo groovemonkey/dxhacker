@@ -1,8 +1,17 @@
 # WHAT I WAS JUST WORKING ON:
 
+got browser console working
+	-needs to scroll/auto-scroll
+	-story output not printing to console
+	-maildump doesn't print data to console
+	-pstore file is permanent -- delete on session exit
+	-hitting ENTER doesn't activate the enter button :-(
 
 
 # TODO:
+
+SESSIONS -- does $gt get in the way? How to have multiple players?
+-randomly name pstore files?
 
 ##########
 FEATURES:

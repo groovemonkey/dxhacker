@@ -5,18 +5,18 @@ require_relative "classes/GameTime.rb"
 require_relative "../resources/people.rb"
 require_relative "classes/Player.rb"
 
+$gt = GameTime.new()
+
 class Game
 	attr_reader :console
 
-	def initialize( gt=GameTime.new(),
-					player=Player.new(name="HackerDude",
+	def initialize( player=Player.new(name="HackerDude",
 								emailaccts=[EmailAcct.new("player@game.com")],
 								computers=["none"],
 								phone="none",
 								timeline="none"),
 					console="You just started a new game!\n\n#{$strings[:mainmenu]}")
 
-		@gt = gt
 		@player = player
 		@console = console
 	end
@@ -33,7 +33,7 @@ class Game
 
 	# THE "MAIN LOOP"
 	def takeTurn(usercommand="")
-		now = @gt.getTime
+		now = $gt.getTime
 
 		$people.each do |name, p|
 			p.timeline[now].call(p) if p.timeline[now] #if there's something to do, do it.
@@ -79,7 +79,6 @@ class Game
 				d.view_files() if d.class == Computer
 			end
 
-
 		elsif usercommand == "hack"
 			output "Enter the IP or Hostname of the target: "
 			targetname = gets().chomp
@@ -92,34 +91,17 @@ class Game
 			# the entered string could be:
 			# hostname, IP address, first name, last name, full name, phone number
 			# check all cases against the string. If nothing is found, return "not found."
+		
+
+		else
+			if usercommand != ""
+				outputs "What? You can't #{usercommand} here, and certainly not *now*!"
+			end
 		end
 
-		@gt.tick
+
+		$gt.tick
 	end
-
-
-	def to_json(*a)
-		# puts "\n\nDEBUG: turning @gt (#{@gt}) and @player #{@player} into JSON"
-		# @gt = @gt.to_json
-		# @player = @player.to_json
-
-		# puts "\n\nDEBUG-post-JSON: @gt is now #{@gt} and @player is now #{@player}"
-
-	    {
-	      'json_class'   => self.class.name,
-	      'data'         => [ "gt" => @gt.to_json, "player" => @player.to_json, "console" => @console ]
-	    }.to_json(*a)
-	end
-
-	def self.json_create(o)
-
-    	new(JSON.parse(o['data'][0]['gt']),
-    		JSON.parse(o['data'][0]['player']),
-    		o['data'][0]['console'] )
-  	end
-
-
-
 
 
 end
